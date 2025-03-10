@@ -1,36 +1,55 @@
-import { useState } from "react";
-import { auth, signInWithEmailAndPassword } from "../../utils/firebase";
+// pages/auth/login.js
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import styles from "../../styles/login.module.css"; // Usa il CSS Module
+import "bootstrap/dist/css/bootstrap.min.css";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import styles from "../../styles/login.module.css";
+import QRCodeDisplay from "../../components/QRCodeDisplay";
 
 export default function Login() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // Modalità QR attivata di default in questa pagina
+  const [useQR, setUseQR] = useState(true);
+  const [width, setWidth] = useState(0);
 
-  const handleEmailLogin = async (e) => {
-    e.preventDefault();
-    setError("");
+  // Aggiorna la larghezza della finestra per layout responsive
+  useEffect(() => {
+    const updateWidth = () => setWidth(window.innerWidth);
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      router.replace("/dashboard");
-    } catch (error) {
-      switch (error.code) {
-        case 'auth/user-not-found':
-          setError("⚠️ User not found. Check your email.");
-          break;
-        case 'auth/wrong-password':
-          setError("⚠️ Incorrect password. Try again.");
-          break;
-        default:
-          setError("⚠️ Error during login. Try again.");
-      }
-    }
+  // Stili inline per la struttura (i colori e altri stili base sono definiti nel CSS)
+  const containerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh",
+    padding: "1rem"
+  };
+
+  const loginBoxStyle = {
+    minHeight: "500px"
+  };
+
+  const contentStyle = {
+    display: "flex",
+    flexDirection: width < 768 ? "column" : "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "1rem",
+    marginBottom: "1rem"
+  };
+
+  const qrColumn = {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: width < 768 ? "1rem" : 0,
+    width: width < 768 ? "100%" : "auto"
   };
 
   return (
@@ -39,61 +58,42 @@ export default function Login() {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
+      style={containerStyle}
       className={styles.container}
     >
-      <div className={styles.loginBox}>
-        <h1 className={styles.title}>Login</h1>
-
-        {error && <div className="alert alert-danger text-center">{error}</div>}
-
-        <form onSubmit={handleEmailLogin} className="w-100">
-          <motion.input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => { setEmail(e.target.value); setError(""); }}
-            required
-            className={`form-control mb-3 ${styles.input}`}
-            whileFocus={{ scale: 1.02 }}
-          />
-          <motion.input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => { setPassword(e.target.value); setError(""); }}
-            required
-            className={`form-control mb-3 ${styles.input}`}
-            whileFocus={{ scale: 1.02 }}
-          />
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            type="submit"
-            className={styles.button}
-          >
-            Login
-          </motion.button>
-        </form>
-
-        <p className="text-center mt-3">
+      <div style={loginBoxStyle} className={styles.loginBox}>
+        <h1 className={styles.title}>Login via QR Code</h1>
+        {/* Link per passare al login manuale */}
+        <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+          <Link href="/auth/manualLogin">
+            <span className="btn btn-secondary">Usa Login Manuale</span>
+          </Link>
+        </div>
+        <div style={contentStyle} className={styles.content}>
+          <div style={qrColumn} className={styles.qrColumn}>
+            <QRCodeDisplay />
+          </div>
+        </div>
+        <p className={styles.textCenter}>
           <Link href="/auth/resetpassw">
-            <motion.span className={styles.forgotButton} whileHover={{ scale: 1.05 }}>
-              Forgot your password?
-            </motion.span>
+            <span className={styles.forgotButton}>
+              Password dimenticata?
+            </span>
           </Link>
         </p>
-
-        <p className="text-center mt-3">Don't have an account?</p>
-        <Link href="/register/register">
-          <motion.button 
-            whileHover={{ scale: 1.05 }} 
-            whileTap={{ scale: 0.95 }} 
-            className={styles.registerButton}
-            style={{ width: "60%", maxWidth: "250px" }} // ✅ Accorciato direttamente in JS
-          >
-            Register
-          </motion.button>
-        </Link>
+        <p className={styles.textCenter}>Non hai un account?</p>
+        <div className={styles.textCenter}>
+          <Link href="/register/register">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={styles.registerButton}
+              style={{ width: "60%", maxWidth: "250px" }}
+            >
+              Registrati
+            </motion.button>
+          </Link>
+        </div>
       </div>
     </motion.div>
   );
