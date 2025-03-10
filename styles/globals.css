@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); /* Importa il font Roboto */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -17,9 +19,12 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: #333; /* Colore del testo */
+  background: linear-gradient(to right, #004d7a, #008793, #00bf72, #a8eb12); /* Colori coerenti */
+  font-family: 'Roboto', sans-serif; /* Applica il font Roboto a tutto il progetto */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -31,8 +36,25 @@ body {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: #007bff; /* Colore dei link */
+  text-decoration: none; /* Rimuovi la sottolineatura dai link */
+}
+
+a:hover {
+  text-decoration: underline; /* Aggiungi la sottolineatura al passaggio del mouse */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif; /* Applica il font Roboto ai titoli */
+}
+
+button {
+  font-family: 'Roboto', sans-serif; /* Applica il font Roboto ai bottoni */
+  cursor: pointer;
+}
+
+input, textarea {
+  font-family: 'Roboto', sans-serif; /* Applica il font Roboto agli input e textarea */
 }
 
 @media (prefers-color-scheme: dark) {

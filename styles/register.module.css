@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(to right, #ff7f50, #ff6347, #ff4500, #ff1493, #ff69b4);
+  font-family: 'Roboto', sans-serif; /* Usa un font più piacevole */
+}
+
+.registerBox {
+  background: #fff;
+  padding: 20px; /* Riduci il padding per adattarlo al quadrato */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90vw; /* Imposta la larghezza al 90% della viewport */
+  max-width: 400px; /* Imposta la larghezza massima */
+  height: 90vw; /* Imposta l'altezza uguale alla larghezza per creare un quadrato */
+  max-height: 400px; /* Imposta l'altezza massima */
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif; /* Usa un font più piacevole */
+}
+
+.input {
+  border-radius: 5px;
+}
+
+.button {
+  width: 50%; /* Mantieni la larghezza del bottone */
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.loginButton {
+  width: 50%; /* Mantieni la larghezza del bottone */
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginButton:hover {
+  background-color: #218838;
+}
+
+.link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .registerBox {
+    padding: 20px; /* Riduci il padding per schermi più piccoli */
+  }
+
+  .button, .loginButton {
+    width: 70%; /* Aumenta la larghezza dei bottoni per schermi più piccoli */
+  }
+}
