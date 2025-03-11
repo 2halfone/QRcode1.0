@@ -3,12 +3,10 @@ import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import QRCodeDisplay from "../../components/QRCodeDisplay";
-import styles from "../../styles/login.module.css";
+import styles from "../../styles/dashboard.module.css"; // Usa il CSS Module
 
-export default function Login() {
+export default function Dashboard() {
   const router = useRouter();
-  // This page uses QR mode by default
   const [width, setWidth] = useState(0);
 
   // Update window width for responsive layout
@@ -29,25 +27,15 @@ export default function Login() {
     flexDirection: width < 768 ? "column" : "row"
   };
 
-  // Rectangle containing the login elements
-  const loginBoxStyle = {
+  const dashboardBoxStyle = {
     background: "#fff",
-    padding: width < 768 ? "1.5rem" : "2.5rem",
+    padding: "2.5rem",
     borderRadius: "8px",
     boxShadow: "0 0 10px rgba(0,0,0,0.1)",
     width: "80%",
-    maxWidth: "605px",
+    maxWidth: "800px",
     boxSizing: "border-box",
-    minHeight: "800px" // Increased height
-  };
-
-  // Style for the section containing the QR code (centered)
-  const qrColumnStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: "1.5rem",
-    width: width < 768 ? "calc(100% + 10px)" : "auto"
+    minHeight: "600px"
   };
 
   return (
@@ -59,19 +47,18 @@ export default function Login() {
       style={containerStyle}
       className={styles.container}
     >
-      <div style={loginBoxStyle} className={styles.loginBox}>
+      <div style={dashboardBoxStyle} className={styles.dashboardBox}>
         <h1 style={{ textAlign: "center", marginBottom: "1.5rem", fontSize: "1.8rem" }}>
-          Login via QR Code
+          Dashboard
         </h1>
-        {/* Link to switch to manual login */}
         <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
           <Link href="/auth/manualLogin">
-            <span className="btn btn-secondary">Use Manual Login</span>
+            <span className="btn btn-secondary">Manual Login</span>
           </Link>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <div style={qrColumnStyle}>
-            <QRCodeDisplay />
+          <div style={{ marginBottom: "1.5rem" }}>
+            <QRCode value="https://example.com" />
           </div>
         </div>
         <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.95rem" }}>
