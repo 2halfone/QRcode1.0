@@ -8,7 +8,6 @@ import styles from "../../styles/login.module.css";
 
 export default function Login() {
   const router = useRouter();
-  // This page uses QR mode by default
   const [width, setWidth] = useState(0);
 
   // Update window width for responsive layout
@@ -32,13 +31,13 @@ export default function Login() {
   // Rectangle containing the login elements
   const loginBoxStyle = {
     background: "#fff",
-    padding: width < 768 ? "1.5rem" : "2.5rem",
+    padding: "2rem",
     borderRadius: "8px",
     boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-    width: "80%",
-    maxWidth: "605px",
+    width: "100%",
+    maxWidth: "600px",
     boxSizing: "border-box",
-    minHeight: "800px" // Increased height
+    minHeight: "500px"
   };
 
   // Style for the section containing the QR code (centered)
@@ -46,8 +45,8 @@ export default function Login() {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "1.5rem",
-    width: width < 768 ? "calc(100% + 10px)" : "auto"
+    marginBottom: "0.5rem", // Reduced margin
+    width: "100%"
   };
 
   return (
@@ -70,7 +69,11 @@ export default function Login() {
           </Link>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <div style={qrColumnStyle}>
+          <div style={{
+            ...qrColumnStyle,
+            maxWidth: "300px", // Prevents image stretching on larger screens
+            width: "100%"
+          }}>
             <QRCodeDisplay />
           </div>
         </div>
@@ -95,6 +98,28 @@ export default function Login() {
               className="btn btn-primary"
             >
               Register
+            </motion.button>
+          </Link>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "1.5rem" }}>
+          <Link href="/absent/absent" style={{ textDecoration: "none" }}>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                width: "70px",
+                height: "70px",
+                borderRadius: "50%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "0.95rem",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease"
+              }}
+              className="btn btn-warning"
+            >
+              Absent
             </motion.button>
           </Link>
         </div>

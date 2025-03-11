@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { auth, signInWithEmailAndPassword } from "../../utils/firebase";
 import { useRouter } from "next/router";
-import { registraLogin } from "../../utils/firestore"; // ✅ Importa la funzione di Firestore
+import { logLogin } from "../../utils/firestore"; // ✅ Import the Firestore function
 import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import styles from "../../styles/login.module.css"; // ✅ Importa il file CSS del login
+import styles from "../../styles/login.module.css"; // ✅ Import the login CSS file
 
 function ManualLogin() {
   const router = useRouter();
@@ -21,27 +21,32 @@ function ManualLogin() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // ✅ Registra il login in Firestore dopo un login riuscito
-      await registraLogin(user.uid, user.email);
+      // ✅ Log the login in Firestore after a successful login
+      await logLogin(user.uid, user.email);
 
-      // ✅ Reindirizza alla dashboard
+      // ✅ Redirect to the dashboard
       router.replace("/dashboard");
     } catch (error) {
-      setError("⚠️ Errore durante il login. Riprova.");
+      setError("⚠️ Error during login. Please try again.");
     }
   };
 
   return (
     <motion.div className={styles.container}>
       <div className={styles.loginBox}>
-        <h1 className={styles.title}>Login</h1>
+        <h1 className={styles.title}>Manual Login</h1>
+        <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+          <Link href="/auth/login">
+            <span className="btn btn-secondary">Use Manual Login</span>
+          </Link>
+        </div>
 
         {error && <div className="alert alert-danger text-center">{error}</div>}
 
         <form onSubmit={handleEmailLogin} className="w-100">
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className={`form-control mb-3 ${styles.input}`} />
           <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className={`form-control mb-3 ${styles.input}`} />
-          <motion.button type="submit" className={styles.button}>
+          <motion.button type="submit" className={`${styles.button} w-50`}>
             Login
           </motion.button>
         </form>
@@ -49,19 +54,21 @@ function ManualLogin() {
         <p className="text-center mt-3">
           <Link href="/auth/resetpassw">
             <motion.span className={styles.forgotButton} whileHover={{ scale: 1.05 }}>
-              Password dimenticata?
+              Forgot Password?
             </motion.span>
           </Link>
         </p>
 
-        <p className="text-center mt-3">Non hai un account?</p>
+        <p className="text-center mt-3">Don't have an account?</p>
         <Link href="/register/register">
-          <motion.button className={styles.registerButton}>Registrati</motion.button>
+          <motion.button className={`${styles.registerButton} w-50`}>
+            Register
+          </motion.button>
         </Link>
       </div>
     </motion.div>
   );
 }
 
-// ✅ Esporta il componente correttamente
+// ✅ Export the component correctly
 export default ManualLogin;
