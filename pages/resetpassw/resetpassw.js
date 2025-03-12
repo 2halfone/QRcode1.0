@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { auth, sendPasswordResetEmail } from "../../utils/firebase";
 import { useRouter } from "next/router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { motion } from 'framer-motion';
