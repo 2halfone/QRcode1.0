@@ -2,9 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router"; // Importa useRouter
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider, db } from "../firebaseConfig";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import QRCode from "qrcode.react";
 
 export default function Home() {

@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { auth, signInWithEmailAndPassword } from "../../utils/firebase";
 import { useRouter } from "next/router";
-import { logLogin } from "../../utils/firestore"; // ✅ Import the Firestore function
 import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
 import Link from "next/link";

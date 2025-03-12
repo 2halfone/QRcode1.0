@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { auth } from "../../utils/firebase";
 
 export default function Settings() {
   const router = useRouter();

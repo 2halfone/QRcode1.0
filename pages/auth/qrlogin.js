@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Html5QrcodeScanner } from "html5-qrcode";
-import { auth, signInWithEmailAndPassword } from "../../utils/firebase";
 import { useRouter } from "next/router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/qrlogin.module.css"; // Stile personalizzato

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { auth, createUserWithEmailAndPassword } from '../../utils/firebase';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

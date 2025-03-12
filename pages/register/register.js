@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { auth, createUserWithEmailAndPassword } from "../../utils/firebase";
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
