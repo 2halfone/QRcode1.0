@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import styles from "../../styles/resetpassword.module.css"; // ✅ Usa il CSS Module
+import styles from "../../styles/resetpassword.module.css"; // ✅ Use the CSS Module
 
 export default function ResetPassword() {
   const router = useRouter();
@@ -18,11 +18,13 @@ export default function ResetPassword() {
 
     try {
       await sendPasswordResetEmail(auth, email);
-      setMessage("✅ Email di reset inviata con successo!");
+      setMessage("✅ Reset email sent successfully!");
     } catch (error) {
-      setError("⚠️ Errore nell'invio della email. Riprova.");
+      setError("⚠️ Error sending reset email. Please try again.");
     }
   };
+  console.log("Bootstrap is applied:", typeof window !== "undefined" && !!document.querySelector('.btn'));
+
 
   return (
     <motion.div
@@ -32,7 +34,7 @@ export default function ResetPassword() {
       transition={{ duration: 0.5 }}
       className={styles.container}
     >
-      <div className={styles.resetBox}>
+      <div className={`${styles.resetBox} shadow-lg`}>
         <h1 className={styles.title}>Reset Password</h1>
 
         {message && <div className="alert alert-success text-center">{message}</div>}
@@ -41,7 +43,7 @@ export default function ResetPassword() {
         <form onSubmit={handleResetPassword} className="w-100">
           <input
             type="email"
-            placeholder="Inserisci la tua email"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => { setEmail(e.target.value); setError(""); setMessage(""); }}
             required
@@ -53,12 +55,12 @@ export default function ResetPassword() {
             type="submit"
             className={styles.button}
           >
-            Invia Email di Reset
+            Send Reset Email
           </motion.button>
         </form>
 
         <p className="text-center mt-3">
-          <Link href="/auth/login">Torna al Login</Link>
+          <Link href="/auth/login">Back to Login</Link>
         </p>
       </div>
     </motion.div>

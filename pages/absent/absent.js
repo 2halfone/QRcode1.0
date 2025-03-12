@@ -13,6 +13,11 @@ export default function Absent() {
     // Handle the absence submission logic here
     console.log("Reason for absence:", reason);
     router.push("/dashboard");
+
+    // Redirect to login page after 2 seconds
+    setTimeout(() => {
+      router.replace("/auth/login");
+    }, 2000);
   };
 
   return (

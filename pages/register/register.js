@@ -48,7 +48,7 @@ export default function Register() {
       transition={{ duration: 0.5 }}
       className={styles.container}
     >
-      <div className={styles.registerBox} style={{ height: '600px' }}> {/* Allunga la forma del quadrato */}
+      <div className={`${styles.registerBox} p-4`} style={{ maxWidth: '500px', margin: 'auto' }}>
         <h1 className={styles.title}>Register</h1>
 
         {error && <div className="alert alert-danger text-center">{error}</div>}
@@ -74,8 +74,8 @@ export default function Register() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             type="submit"
-            className={styles.button}
-            style={{ width: '50%', background: 'linear-gradient(to right, #007bff, #0056b3)' }} // Accorciato della metà e colore sfumato
+            className={`btn btn-primary ${styles.button}`}
+            style={{ width: '50%' }}
           >
             Register
           </motion.button>
