@@ -1,3 +1,4 @@
+import { QRCode } from "react-qr-code";
 import React from "react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router"; // Importa useRouter
-import { QRCode } from "qrcode.react";
+import { QRCode } from "react-qr-code";
 
 export default function Home() {
   const router = useRouter(); // Inizializza useRouter
