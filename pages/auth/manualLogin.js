@@ -33,11 +33,16 @@ function ManualLogin() {
     <motion.div className={styles.container}>
       <div className={styles.loginBox}>
         <h1 className={styles.title}>Manual Login</h1>
-        <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+        <motion.div
+          initial={{ x: "-100vw" }}
+          animate={{ x: 0 }}
+          transition={{ type: "spring", stiffness: 50 }}
+          style={{ textAlign: "center", marginBottom: "1.5rem" }}
+        >
           <Link href="/auth/login">
-            <span className="btn btn-secondary">Use Manual Login</span>
+            <span className="btn btn-secondary">Login via QR Code</span>
           </Link>
-        </div>
+        </motion.div>
 
         {error && <div className="alert alert-danger text-center">{error}</div>}
 

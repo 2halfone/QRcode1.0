@@ -28,9 +28,26 @@ export default function Absent() {
       transition={{ duration: 0.5 }}
       className={styles.container}
     >
-      <div className={styles.loginBox}>
-        <h1 className={styles.title}>Absent</h1>
-        <form onSubmit={handleAbsentSubmit} className="w-100">
+      <motion.div
+        initial={{ x: "-100vw" }}
+        animate={{ x: 0 }}
+        transition={{ type: "spring", stiffness: 50 }}
+        className={`${styles.loginBox} card shadow-lg`}
+      >
+        <motion.h1
+          className={`${styles.title} card-title`}
+          style={{ fontSize: "2.5rem" }}
+          whileHover={{ scale: 1.1, textShadow: "0px 0px 8px rgba(0, 0, 0, 0.5)" }}
+        >
+          Absent
+        </motion.h1>
+        <motion.form
+          initial={{ x: "100vw" }}
+          animate={{ x: 0 }}
+          transition={{ type: "spring", stiffness: 50, delay: 0.2 }}
+          onSubmit={handleAbsentSubmit}
+          className="w-100"
+        >
           <div className="form-group mb-3">
             <label htmlFor="reason" className="form-label">Select Reason for Absence</label>
             <select
@@ -47,11 +64,16 @@ export default function Absent() {
               <option value="other">Other</option>
             </select>
           </div>
-          <motion.button type="submit" className={`${styles.button} w-50`}>
+          <motion.button
+            type="submit"
+            className={`${styles.button} w-50`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             Submit
           </motion.button>
-        </form>
-      </div>
+        </motion.form>
+      </motion.div>
     </motion.div>
   );
 }

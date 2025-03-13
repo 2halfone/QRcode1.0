@@ -59,31 +59,54 @@ export default function Login() {
       className={styles.container}
     >
       <div style={loginBoxStyle} className={styles.loginBox}>
-        <h1 style={{ textAlign: "center", marginBottom: "1.5rem", fontSize: "1.8rem" }}>
+        <motion.h1
+          style={{ textAlign: "center", marginBottom: "1.5rem", fontSize: "1.8rem" }}
+          whileHover={{ scale: 1.1, textShadow: "0px 0px 8px rgba(0, 0, 0, 0.5)" }}
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }} // Increased duration to slow down the pulse effect
+        >
           Login via QR Code
-        </h1>
+        </motion.h1>
         {/* Link to switch to manual login */}
-        <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+        <motion.div
+          initial={{ x: "-100vw" }}
+          animate={{ x: 0 }}
+          transition={{ type: "spring", stiffness: 50 }}
+          style={{ textAlign: "center", marginBottom: "1.5rem" }}
+        >
           <Link href="/auth/manualLogin">
             <span className="btn btn-secondary">Use Manual Login</span>
           </Link>
-        </div>
+        </motion.div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <div style={{
-            ...qrColumnStyle,
-            maxWidth: "300px", // Prevents image stretching on larger screens
-            width: "100%"
-          }}>
+          <div style={qrColumnStyle}>
             <QRCodeDisplay />
           </div>
         </div>
-        <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.95rem" }}>
-          <Link href="/auth/resetpassw">Forgot Password?</Link>
-        </p>
-        <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.95rem" }}>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.95rem" }}
+        >
+          <Link href="/auth/resetpassw" style={{ textDecoration: "none" }}>
+            Forgot Password?
+          </Link>
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.95rem" }}
+        >
           Don't have an account?
-        </p>
-        <div style={{ textAlign: "center" }}>
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          style={{ textAlign: "center" }}
+        >
           <Link href="/register/register">
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -100,8 +123,13 @@ export default function Login() {
               Register
             </motion.button>
           </Link>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "1.5rem" }}>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          style={{ display: "flex", justifyContent: "center", marginTop: "1.5rem" }}
+        >
           <Link href="/absent/absent" style={{ textDecoration: "none" }}>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -122,7 +150,7 @@ export default function Login() {
               Absent
             </motion.button>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );

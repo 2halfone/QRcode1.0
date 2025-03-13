@@ -25,7 +25,6 @@ export default function ResetPassword() {
   };
   console.log("Bootstrap is applied:", typeof window !== "undefined" && !!document.querySelector('.btn'));
 
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -50,6 +49,9 @@ export default function ResetPassword() {
             className={`form-control mb-3 ${styles.input}`}
           />
           <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             type="submit"
